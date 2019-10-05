@@ -1,0 +1,36 @@
+{
+    "products": [{
+            "pid": "1",
+            "userid": "ABC",
+            "username": "abc",
+            "title": "Phone",
+            "description": "Very Nice Phone",
+            "price": 1000,
+            "category": "phone",
+            "maxcount": 10,
+            "spec": "Good"
+        },
+        {
+            "pid": "2",
+            "userid": "DEF",
+            "username": "def",
+            "title": "watch",
+            "description": "Apple watch",
+            "price": 3000,
+            "category": "watch",
+            "maxcount": 10,
+            "spec": "Nice"
+        },
+        {
+            "pid": "3",
+            "userid": "HIG",
+            "username": "hig",
+            "title": "mouse",
+            "description": "corsair mouse",
+            "price": 500,
+            "category": "pointer",
+            "maxcount": 10,
+            "spec": "very good"
+        }
+    ]
+}
