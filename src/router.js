@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/Login'
 import notfound from '@/views/notfound'
+import list from '@/views/product-list'
 
 Vue.use(Router)
 
@@ -13,6 +14,11 @@ const router = new Router({
       path: '/',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/list',
+      name: 'list',
+      component: list
     },
     {
       path: '*',
