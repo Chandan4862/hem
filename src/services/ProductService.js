@@ -9,13 +9,13 @@ const apiClient = axios.create({
 })
 
 export default {
-    getProductById(pid) {
-        return apiClient.get('/o/product/view/' + "57ef6")
-    },
-    addProductToCartService(pid) {
-        console.log("CARTSERVICE")
-        return apiClient.post("/o/product/addtocart/" + "57ef6")
-    }
+  getProductById(pid) {
+    return apiClient.get('/o/product/view/' + pid)
+  },
+  addProductToCartService(pid) {
+    console.log('CARTSERVICE')
+    return apiClient.post('/o/product/addtocart/' + pid)
+  },
   getProduct() {
     return apiClient.get('/o/product/view')
   }

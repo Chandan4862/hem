@@ -14,73 +14,38 @@ export default {
       console.log('mito', list)
       state.products = list
     },
-    actions: {
-        addProductToCart({
-            commit,
-            state
-        }, prodId) {
-            ProductService.addProductToCartService(prodId).then(response => {
-                console.log(response.data)
-                commit('SET_CART', response.data)
-            }).catch(error => {
-                console.log("There was an error: " + error)
-            })
-
-        },
-        fetchProduct({
-            commit,
-        }, pid) {
-            ProductService.getProductById(pid).then(response => {
-                    commit('SET_PRODUCT', response.data)
-                })
-                .catch(error => {
-                    console.log("There was an error: " + error)
-                })
-        }
-    //set the product fetched from db
     SET_PRODUCT(state, product) {
       state.product = product
     },
-    mutations: {
-        //set the product fetched from db
-        SET_PRODUCT(state, product) {
-            state.product = product
-        },
-        //set the cart data fetched from db
-        SET_CART(state, cart) {
-            state.cart = cart
-        }
     //set the cart data fetched from db
     SET_CART(state, cart) {
       state.cart = cart
     }
   },
   actions: {
-    productsList({ commit }) {
-      return ProductService.getProduct()
-        .then(response => commit('SET_PRODUCTS', response.data))
-        .catch(err => console.log(err))
-    },
-    addProductToCart({ state }, prodid) {
-      const cartItem = {
-        pid: prodid
-      }
-      ProductService.addProductToCartService(cartItem)
+    addProductToCart({ commit, state }, prodId) {
+      ProductService.addProductToCartService(prodId)
         .then(response => {
           console.log(response.data)
+          commit('SET_CART', response.data)
         })
         .catch(error => {
           console.log('There was an error: ' + error)
         })
     },
     fetchProduct({ commit }, pid) {
-      ProductService.getProductByid(pid)
+      ProductService.getProductById(pid)
         .then(response => {
           commit('SET_PRODUCT', response.data)
         })
         .catch(error => {
           console.log('There was an error: ' + error)
         })
+    },
+    productsList({ commit }) {
+      return ProductService.getProduct()
+        .then(response => commit('SET_PRODUCTS', response.data))
+        .catch(err => console.log(err))
     },
     fetchCart({ commit }) {
       ProductService.getCart()

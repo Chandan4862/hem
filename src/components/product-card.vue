@@ -1,16 +1,20 @@
 <template>
-  <!-- <router-link class="event-link" :to="{ name: 'product-show', params: { pid: product.pid } }"> -->
-  <div class="card" style="width: 15rem;" @click="productShow()">
-    <div>Image</div>
-    <div class="card-body">
-      <h5 class="card-title">{{ productName }}</h5>
-      <p class="card-text">{{ productDesc }}</p>
-      <h5 class="card-title">{{ price }}</h5>
-      <h5 class="card-title">PID{{ product.pid }}</h5>
-      <a href="#" class="btn btn-primary">Order</a>
+  <router-link
+    class="event-link"
+    :to="{ name: 'product-show', params: { pid: product.pid } }"
+  >
+    <div class="card" style="width: 15rem;">
+      <div>Image</div>
+      <div class="card-body">
+        <h5 class="card-title">{{ productName }}</h5>
+        <div class="contain">
+          <p class="card-text">{{ productDesc }}</p>
+        </div>
+        <h5 class="card-title">{{ price }}</h5>
+        <a href="#" class="btn btn-primary">Order</a>
+      </div>
     </div>
-  </div>
-  <!-- </router-link> -->
+  </router-link>
 </template>
 
 <script>
@@ -28,7 +32,7 @@ export default {
     productShow() {
       this.$router.push({
         path: '/product-details',
-        params: { 'pid': this.product.pid }
+        params: { pid: this.product.pid }
       })
     }
   },
@@ -60,5 +64,9 @@ export default {
   color: rgb(0, 0, 0);
   text-decoration: none;
   font-weight: 100;
+}
+.contain {
+  overflow: hidden;
+  height: 100px;
 }
 </style>

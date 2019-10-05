@@ -7,7 +7,6 @@
     <!--Right Column -->
     <div class="Right Column">
       <!-- Product Details -->
-      {{ pid }}
       <div class="product-description">
         <span>{{ product.product.title }}</span>
         <h1>{{ product.product.brand }}</h1>
@@ -35,7 +34,9 @@
           v-on:click="addToCart"
           :disabled="product.product.maxcount == 0"
           :class="{ disabledButton: product.product.maxcount == 0 }"
-        >{{ btn }}</button>
+        >
+          {{ btn }}
+        </button>
 
         <span v-if="product.product.maxcount < 1">Sold Out</span>
       </div>
@@ -49,22 +50,22 @@ import { mapState } from 'vuex'
 export default {
   props: {
     pid: {
-      type: String,
-      default: 'chandan'
+      type: String
     }
   },
   data() {
     return {
-      btn: 'Buy now'
+      btn: 'AddToCart'
     }
   },
   created() {
+    console.log('PID', this.pid)
     this.$store.dispatch('fetchProduct', this.pid)
   },
   methods: {
     addToCart() {
       console.log('Add to cart')
-      console.log(this.product.product.pid)
+      console.log('ADD TO CART', this.product.product.pid)
       this.$store.dispatch('addProductToCart', this.product.product.pid)
     }
   },
@@ -74,6 +75,7 @@ export default {
         this.btn = 'Sold Out'
       }
     },
+
     ...mapState(['product', 'cart'])
   }
 }
