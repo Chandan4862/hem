@@ -7,7 +7,7 @@
     <!--Right Column -->
     <div class="Right Column">
       <!-- Product Details -->
-      {{pid}}
+      {{ pid }}
       <div class="product-description">
         <span>{{ product.product.title }}</span>
         <h1>{{ product.product.brand }}</h1>
@@ -47,7 +47,12 @@
 import { mapState } from 'vuex'
 
 export default {
-  props: ['pid'],
+  props: {
+    pid: {
+      type: String,
+      default: 'chandan'
+    }
+  },
   data() {
     return {
       btn: 'Buy now'

@@ -1,5 +1,5 @@
 import axios from 'axios'
-const apiCli = axios.create({
+const apiClient = axios.create({
   baseURL: `http://192.168.20.108:4700`,
   withCredentials: false,
   headers: {
@@ -9,15 +9,15 @@ const apiCli = axios.create({
 })
 
 export default {
-    getProduct(pid) {
-        return apiClient.get('/o/product/view/' + "04f7f")
-    },
-    addProductToCartService(pid) {
-        console.log("CARTSERVICE")
-        return apiClient.post("/o/product/addtocart/" + "04f7f")
-    }
-
-  getProduct() {
-    return apiCli.get('/o/product/view')
+  getProductByid(pid) {
+    console.log('PID', pid)
+    return apiClient.get('/o/product/view/' + pid)
   },
+  addProductToCartService(pid) {
+    console.log('CARTSERVICE')
+    return apiClient.post('/o/product/addtocart/' + '04f7f')
+  },
+  getProduct() {
+    return apiClient.get('/o/product/view')
+  }
 }
