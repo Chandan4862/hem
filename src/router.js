@@ -25,13 +25,7 @@ const router = new Router({
       path: '*',
       name: 'notfound',
       component: notfound
-    },
-    {
-      path: '/product-details',
-      name: 'product-show',
-      component: ProductShow,
-      props: true
-    }
+    }}
   ]
 })
 // router.beforeEach((to, from, next) => {
