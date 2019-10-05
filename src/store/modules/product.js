@@ -27,7 +27,7 @@ export default {
         fetchProduct({
             commit,
         }, pid) {
-            ProductService.getProduct(pid).then(response => {
+            ProductService.getProductById(pid).then(response => {
                     commit('SET_PRODUCT', response.data)
                 })
                 .catch(error => {
