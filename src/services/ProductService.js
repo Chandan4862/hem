@@ -7,15 +7,17 @@ const apiCli = axios.create({
     'Content-Type': 'application/json'
   }
 })
+
 export default {
+    getProduct(pid) {
+        return apiClient.get('/o/product/view/' + "04f7f")
+    },
+    addProductToCartService(pid) {
+        console.log("CARTSERVICE")
+        return apiClient.post("/o/product/addtocart/" + "04f7f")
+    }
+
   getProduct() {
     return apiCli.get('/o/product/view')
   },
-  getProductByid(pid) {
-    return apiCli.get('/o/product/view/' + pid)
-  },
-  addProductToCartService(pid) {
-    console.log('CARTSERVICE')
-    return apiCli.post('/cart', pid)
-  }
 }
