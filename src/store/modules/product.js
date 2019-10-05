@@ -13,35 +13,12 @@ export default {
     },
     actions: {
         addProductToCart({
+            commit,
             state
         }, prodId) {
-            // const cartItem = state.cart.find(item => item.pid === product.product.pid)
-            // if (!cartItem) {
-            //     //push product to cart
-            //     console.log(product.product.pid)
-            //     //create a product object to push to DB
-            //     const cartEntry = {
-            //         pid: product.product.pid,
-            //         qty: 1
-            //     }
-            //     ProductService.addProductToCartService(cartEntry).then(response => {
-            //         //console.log(response.data)
-            //         commit('pushProductToCart', product.product.pid)
-            //     }).catch(error => {
-            //         console.log("There was an error: " + error)
-            //     })
-
-            //     } else {
-            //     //if item already present in cart increment
-            //     console.log(product.product.pid)
-
-            //     commit('incrementItemQuantity', cartItem)
-            //     ProductService.incrementProductQuantity(cart).then(response => {
-            //         console.log(response.data)
-            //     })
-            //}
             ProductService.addProductToCartService(prodId).then(response => {
                 console.log(response.data)
+                commit('SET_CART', response.data)
             }).catch(error => {
                 console.log("There was an error: " + error)
             })
@@ -56,15 +33,6 @@ export default {
                 .catch(error => {
                     console.log("There was an error: " + error)
                 })
-        },
-        fetchCart({
-            commit
-        }) {
-            ProductService.getCart().then(response => {
-                commit('SET_CART', response.data)
-            }).catch(error => {
-                console.log("There was an error: " + error)
-            })
         }
     },
     mutations: {
@@ -76,17 +44,6 @@ export default {
         SET_CART(state, cart) {
             state.cart = cart
         }
-
-        // pushProductToCart(state, pid) {
-        //     state.cart.push({
-        //         pid: pid,
-        //         qty: 1
-        //     })
-        // },
-
-        // incrementItemQuantity(state, cartItem) {
-        //     cartItem.qty++
-        // },
     }
 
 
