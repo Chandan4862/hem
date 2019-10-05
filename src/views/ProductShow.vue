@@ -48,6 +48,7 @@
 import { mapState } from 'vuex'
 
 export default {
+  name: 'productDetail',
   props: {
     pid: {
       type: String

@@ -7,6 +7,7 @@
       <div>Image</div>
       <div class="card-body">
         <h5 class="card-title">{{ productName }}</h5>
+        PID{{ product.pid }}
         <div class="contain">
           <p class="card-text">{{ productDesc }}</p>
         </div>
