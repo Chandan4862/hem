@@ -9,21 +9,13 @@ const apiClient = axios.create({
     }
 })
 
-const apiJson = axios.create({
-    baseURL: `http://localhost:3000`,
-    withCredentials: false,
-    headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-    }
-})
 export default {
     getProduct(pid) {
-        return apiClient.get('/o/product/view/' + "79c9e")
+        return apiClient.get('/o/product/view/' + "04f7f")
     },
     addProductToCartService(pid) {
         console.log("CARTSERVICE")
-        return apiJson.post('/cart', pid)
+        return apiClient.post("/o/product/addtocart/" + "04f7f")
     }
 
 }

@@ -7,14 +7,14 @@ Vue.use(Vuex)
 export default {
     state: {
         product: {}, //will store the specific product being used
-        cart:[], //will save the product id and product quantity
+        cart: [], //will save the product id and product quantity
 
 
     },
     actions: {
         addProductToCart({
             state
-        }, prodid) {
+        }, prodId) {
             // const cartItem = state.cart.find(item => item.pid === product.product.pid)
             // if (!cartItem) {
             //     //push product to cart
@@ -40,10 +40,7 @@ export default {
             //         console.log(response.data)
             //     })
             //}
-            const cartItem = {
-                pid: prodid
-            }
-            ProductService.addProductToCartService(cartItem).then(response => {
+            ProductService.addProductToCartService(prodId).then(response => {
                 console.log(response.data)
             }).catch(error => {
                 console.log("There was an error: " + error)
