@@ -1,11 +1,15 @@
 <template>
   <div>
+    <navBar></navBar>
     <router-view :key="$route.fullPath" />
   </div>
 </template>
 <script>
+import navBar from '@/views/NavBar'
 export default {
-  components: {},
+  components: {
+    navBar
+  },
   data() {
     return {
       logged: null

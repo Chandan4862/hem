@@ -8,11 +8,13 @@ import 'jquery/dist/jquery.min.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import './assets/css/style.css'
 import Vuelidate from 'vuelidate'
+import BootstrapVue from 'bootstrap-vue'
 import jQuery from 'jquery'
 global.jQuery = jQuery
 global.$ = jQuery
 
 Vue.use(Vuelidate)
+Vue.use(BootstrapVue)
 
 Vue.filter('date', function(value) {
   const date = new Date(value)

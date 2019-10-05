@@ -25,7 +25,7 @@ const router = new Router({
       path: '*',
       name: 'notfound',
       component: notfound
-    }}
+    }
   ]
 })
 // router.beforeEach((to, from, next) => {
