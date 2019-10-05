@@ -3,14 +3,14 @@ import Router from 'vue-router'
 import Login from './views/Login'
 import notfound from '@/views/notfound'
 import list from '@/views/product-list'
+import ProductShow from "./views/ProductShow.vue"
 
 Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: 'login',
       component: Login
@@ -24,6 +24,11 @@ const router = new Router({
       path: '*',
       name: 'notfound',
       component: notfound
+    },
+    {
+      path: "/product-details",
+      name: "product-show",
+      component: ProductShow
     }
   ]
 })
