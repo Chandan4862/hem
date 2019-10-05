@@ -10,12 +10,12 @@ const apiCli = axios.create({
 export default {
   getProduct() {
     return apiCli.get('/o/product/view')
+  },
+  getProductByid(pid) {
+    return apiCli.get('/o/product/view/' + pid)
+  },
+  addProductToCartService(pid) {
+    console.log('CARTSERVICE')
+    return apiCli.post('/cart', pid)
   }
-    getProduct(pid) {
-        return apiClient.get('/o/product/view/' + "79c9e")
-    },
-    addProductToCartService(pid) {
-        console.log("CARTSERVICE")
-        return apiJson.post('/cart', pid)
-    }
 }

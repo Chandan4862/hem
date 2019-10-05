@@ -7,6 +7,7 @@
     <!--Right Column -->
     <div class="Right Column">
       <!-- Product Details -->
+      {{pid}}
       <div class="product-description">
         <span>{{ product.product.title }}</span>
         <h1>{{ product.product.brand }}</h1>
@@ -64,10 +65,8 @@ export default {
   },
   computed: {
     status() {
-      console.log('working')
       if (product.product.maxcount < 1) {
         this.btn = 'Sold Out'
-        console.log('Working')
       }
     },
     ...mapState(['product', 'cart'])

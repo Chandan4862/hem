@@ -28,7 +28,8 @@ const router = new Router({
     {
       path: "/product-details",
       name: "product-show",
-      component: ProductShow
+      component: ProductShow,
+      props:true
     }
   ]
 })

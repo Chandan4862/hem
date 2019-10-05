@@ -5,6 +5,7 @@
       <h5 class="card-title">{{ productName }}</h5>
       <p class="card-text">{{ productDesc }}</p>
       <h5 class="card-title">{{ price }}</h5>
+      <h5 class="card-title">{{ product.pid }}</h5>
       <a href="#" class="btn btn-primary">Order</a>
     </div>
   </div>
@@ -24,7 +25,7 @@ export default {
   methods: {
     productDetail() {
       this.$router.push({
-        path: '/productdetail',
+        path: '/product-details',
         params: { pid: this.product.pid }
       })
     }
