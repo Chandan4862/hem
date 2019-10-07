@@ -1,79 +1,48 @@
 <template>
-  <div>
-    <div class="container-fluid pt-3">
-      <div class="row">
-        <div class="col-sm-3 col-md-3 col-lg-3"></div>
-        <div class="col-sm-6 col-md-6 col-lg-6">
-          <div id="loginApp">
-            <div class="card rounded-25">
-              <div class="card-body p-5">
-                <form @submit.prevent="submit">
-                  <div class="form-group">
-                    <label for="username">Username :</label>
-                    <input
-                      id="username"
-                      class="form-control inline-p30 line-h-23 rounded-25"
-                      type="text"
-                      v-model="$v.login.username.$model"
-                      :class="{
-                        'is-invalid': $v.login.username.$error,
-                        'is-valid': !$v.login.username.$invalid
-                      }"
-                      placeholder="Please Enter your username"
-                    />
-                    <div class="valid-feedback pl-3">
-                      Your username is valid!
-                    </div>
-                    <div class="invalid-feedback pl-3">
-                      <span v-if="!$v.login.username.required"
-                        >Username is required</span
-                      >
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="password">Password :</label>
-                    <input
-                      id="password"
-                      class="form-control inline-p30 line-h-23 rounded-25"
-                      type="password"
-                      placeholder="Please Enter Password"
-                      v-model="$v.login.password.$model"
-                      :class="{
-                        'is-invalid': $v.login.password.$error,
-                        'is-valid': !$v.login.password.$invalid
-                      }"
-                    />
-                    <div class="valid-feedback pl-3">
-                      Your Password is valid!
-                    </div>
-                    <div class="invalid-feedback pl-3">
-                      <span v-if="!$v.login.password.required"
-                        >Password is required</span
-                      >
-                      <span v-if="!$v.login.password.minLength">
-                        {{ $v.login.password.$params.minLength.min }} characters
-                        minimum
-                      </span>
-                    </div>
-                  </div>
+  <div class="container">
+    <center>
+      <h2>Login Form</h2>
+    </center>
 
-                  <br />
-                  <button
-                    type="submit"
-                    id="login"
-                    name="login"
-                    class="btn form-control btn-primary text-uppercase line-h-23 rounded-25 mb-3"
-                  >
-                    Login
-                  </button>
-                  <br />
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
+    <form @submit.prevent="submit" class="formlogin">
+      <div class="imgcontainer">
+        <img src="/login.jpg" alt="Avatar" class="avatar" />
       </div>
-    </div>
+
+      <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input
+          type="text"
+          placeholder="Enter Username"
+          v-model="login.username"
+          required
+        />
+
+        <label for="psw"><b>Password</b></label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          v-model="login.password"
+          required
+        />
+
+        <button class="logbutton" type="submit">Login</button>
+        <label>
+          <input type="checkbox" checked="checked" name="remember" /> Remember
+          me
+        </label>
+      </div>
+
+      <div class="container" style="background-color:#F5F5F5">
+        <button type="button" @click="cancel" class="cancelbtn logbutton">
+          Cancel
+        </button>
+        <span class="psw"
+          >Not registered.Click here to register
+          <a href="/register">Register</a></span
+        >
+      </div>
+    </form>
   </div>
 </template>
 
@@ -109,24 +78,100 @@ export default {
   //   }
   //   next()
   // },
-  methods: {},
-  submit() {
-    this.$v.$touch()
+  methods: {
+    submit() {
+      this.$v.$touch()
 
-    if (!this.$v.$invalid) {
-      this.$store
-        .dispatch('LoginUser', this.login)
-        .then(() => {
-          console.log(this.login)
-          // this.$router.push({ name: 'eventlist' })
-          location.reload()
-        })
-        .catch(() => {
-          console.log('ERROR in LOGIN VUE')
-        })
+      if (!this.$v.$invalid) {
+        this.$store
+          .dispatch('LoginUser', this.login)
+          .then(() => {
+            console.log(this.login)
+            // this.$router.push({ name: 'eventlist' })
+            location.reload()
+          })
+          .catch(() => {
+            console.log('ERROR in LOGIN VUE')
+          })
+      }
+    },
+    cancel() {
+      this.$router.push({
+        name: 'homepage'
+      })
     }
   }
 }
 </script>
 
-<style></style>
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.formlogin {
+  border: 3px solid #f1f1f1;
+  width: 60%;
+  margin-left: 250px;
+  background-color: white;
+}
+
+input[type='text'],
+input[type='password'] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.logbutton {
+  background-color: #3399ff;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+  .cancelbtn {
+    width: 100%;
+  }
+}
+</style>
