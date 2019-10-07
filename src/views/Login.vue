@@ -82,18 +82,11 @@ export default {
     submit() {
       this.$v.$touch()
 
-      if (!this.$v.$invalid) {
-        this.$store
-          .dispatch('LoginUser', this.login)
-          .then(() => {
-            console.log(this.login)
-            // this.$router.push({ name: 'eventlist' })
-            location.reload()
-          })
-          .catch(() => {
-            console.log('ERROR in LOGIN VUE')
-          })
-      }
+      // if (!this.$v.$invalid) {
+      this.$store
+        .dispatch('LoginUser', this.login)
+        .then(() => {})
+        .catch(err => console.log(err))
     },
     cancel() {
       this.$router.push({

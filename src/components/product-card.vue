@@ -1,6 +1,7 @@
 <template>
   <router-link
     class="event-link"
+    style="text-decoration:none"
     :to="{ name: 'product-show', params: { pid: product.pid } }"
   >
     <div class="card" style="width: 15rem;">

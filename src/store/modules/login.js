@@ -9,7 +9,7 @@ export default {
     token: ''
   },
   mutations: {
-    SET_USER({ state }, user) {
+    SET_USER(state, user) {
       state.token = user.token
     },
     LOGOUT_USER() {
@@ -18,20 +18,25 @@ export default {
   },
   actions: {
     LoginUser({ commit }, login) {
-      return LoginService.getLogin(login)
+      LoginService.getLogin(login)
+
         .then(response => {
-          console.log('SUCCESS')
           localStorage.setItem('token', response.data.Authorization)
-          localStorage.setItem('username', response.data.UserName)
           commit('SET_USER', response.data)
+          window.location.href = '/list'
         })
-        .catch(() => {
-          console.log('ERROR in login store')
+        .catch(error => {
+          console.log(error)
+          alert('Invalid Credentials')
         })
     },
     logout({ commit }) {
       commit('LOGOUT_USER')
       router.push({ name: 'login' })
+    },
+    RegisterUser({ commit }, user) {
+      LoginService.Reguser(user)
+       
     }
   }
 }

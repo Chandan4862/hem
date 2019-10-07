@@ -29,9 +29,4 @@ export default {
   }
 }
 </script>
-<style scoped>
-#app {
-  background-color: #f8f8f8;
-  height: 100%;
-}
-</style>
+<style scoped></style>

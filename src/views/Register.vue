@@ -26,7 +26,12 @@
             required
           />
           <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="Enter Email" name="email" required />
+          <input
+            type="text"
+            placeholder="Enter Email"
+            v-model="User.email"
+            required
+          />
           <label for="username"><b>UserName:</b></label>
           <input
             type="text"
@@ -91,6 +96,16 @@ export default {
   data() {
     return {
       User: {}
+    }
+  },
+  methods: {
+    submit() {
+      this.$store.dispatch('RegisterUser', this.User).then(() => {
+        alert('registerd Sussessfully')
+        this.$router.push({
+          name: 'login'
+        })
+      })
     }
   }
 }

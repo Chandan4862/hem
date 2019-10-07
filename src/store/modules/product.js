@@ -25,10 +25,7 @@ export default {
   actions: {
     addProductToCart({ commit, state }, prodId) {
       ProductService.addProductToCartService(prodId)
-        .then(response => {
-          console.log(response.data)
-          commit('SET_CART', response.data)
-        })
+        .then(response => {})
         .catch(error => {
           console.log('There was an error: ' + error)
         })
@@ -47,10 +44,11 @@ export default {
         .then(response => commit('SET_PRODUCTS', response.data))
         .catch(err => console.log(err))
     },
-    fetchCart({ commit }) {
-      ProductService.getCart()
+    cartview({ commit }) {
+      ProductService.cartview()
         .then(response => {
-          commit('SET_CART', response.data)
+          console.log(response.data)
+          commit('SET_CART', response.data.cart)
         })
         .catch(error => {
           console.log('There was an error: ' + error)

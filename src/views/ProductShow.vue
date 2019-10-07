@@ -1,52 +1,48 @@
 <template>
-  <div class="product">
-    <div class="left-column">
-      <img src="vmSocks-blue-onWhite.jpg" />
-    </div>
+  <div class="container">
+    <h1>Product Details</h1>
 
-    <!--Right Column -->
-    <div class="Right Column">
-      <!-- Product Details -->
-      <div class="product-description">
-        <span>{{ product.product.title }}</span>
-        <h1>{{ product.product.brand }}</h1>
+    <div class="row">
+      <div class="col-sm-4">
+        <img src="image" height="350px" width="350px;" />
+      </div>
+      <div class="col-sm-8" style="background-color:white">
+        <h3>{{ product.product.title }}</h3>
+        <h6>{{ product.product.brand }}</h6>
+        <h5>Description:</h5>
         <p>{{ product.product.description }}</p>
-      </div>
 
-      <!-- Product Specs -->
-      <div class="product-specs">
-        <!-- Product Color -->
-        <!-- <div
-          class="profuct-color"
-          v-for="(varient, index) in varients"
-          :key="varient.varientId"
-          :style="{ backgroundColor: varient.varientColor }"
-          v-on:mouseover="updateProduct(index)"
-        >-->
-      </div>
-      <div class="product-specs">{{ product.product.spec }}</div>
-
-      <!--Pricing and buy -->
-      <div class="product-price">
-        <span>{{ product.product.price }}</span>
+        <h5>Rs.{{ product.product.price }}</h5>
 
         <button
+          class="sigupbutton"
           v-on:click="addToCart"
           :disabled="product.product.maxcount == 0"
-          :class="{ disabledButton: product.product.maxcount == 0 }"
+          :class="{
+            disabledButton: product.product.maxcount == 0
+          }"
         >
-          {{ btn }}
+          Add to Cart
         </button>
-
         <button
-          v-on:click="BuyNow"
+          style="margin-left:10px;"
+          class="sigupbutton"
           :disabled="product.product.maxcount == 0"
-          :class="{ disabledButton: product.product.maxcount == 0 }"
+          :class="{
+            disabledButton: product.product.maxcount == 0
+          }"
         >
-          {{ btn2 }}
+          Buy Now
         </button>
-
-        <span v-if="product.product.maxcount < 1">Sold Out</span>
+      </div>
+    </div>
+    <div
+      class="row"
+      style="margin-top:50px;background-color:white;width:30%;padding:20px;"
+    >
+      <div class="col">
+        <h5>Product Specifications:</h5>
+        {{ product.product.spec }}
       </div>
     </div>
   </div>
@@ -63,10 +59,7 @@ export default {
     }
   },
   data() {
-    return {
-      btn: 'AddToCart',
-      btn2: 'Buy Now'
-    }
+    return {}
   },
   created() {
     console.log('PID', this.pid)
@@ -75,25 +68,15 @@ export default {
   methods: {
     addToCart() {
       console.log('Add to cart')
-      console.log('ADD TO CART', this.product.product.pid)
-      this.$store.dispatch('addProductToCart', this.product.product.pid)
-    },
-    BuyNow() {
-      console.log('Buy Now')
-
-      this.$router.push({
-        path: '/buynow',
-        name: 'buy-now'
-      })
+      console.log('ADD TO CART', this.product.product)
+      this.$store.dispatch('addProductToCart', this.product.product)
     }
   },
   computed: {
     status() {
-      if (this.product.product.maxcount < 1) {
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      if (product.product.maxcount < 1) {
         this.btn = 'Sold Out'
       }
-      return 1
     },
 
     ...mapState(['product', 'cart'])
@@ -103,127 +86,14 @@ export default {
 
 <style scoped>
 /* Basic Styling */
-html,
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-}
-
-.product {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  /* max-width: 1200px; */
-  margin: 0 auto;
-  padding: 15px;
-  display: flex;
-}
-
-/* Columns */
-.left-column {
-  width: 70%;
-  position: relative;
-}
-
-.right-column {
-  width: 30%;
-  margin-top: 60px;
-}
-
-/* Left Column */
-.left-column img {
-  width: 100%;
-  position: absolute;
-  left: -100px;
-  top: 0;
-  opacity: 100;
-  transition: all 0.3s ease;
-}
-
-/* Product Description */
-.product-description {
-  border-bottom: 1px solid #e1e8ee;
-  margin-bottom: 20px;
-}
-.product-description span {
-  font-size: 35px;
-  color: #358ed7;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-.product-description h1 {
-  font-weight: 300;
-  font-size: 20px;
-  color: #43484d;
-  letter-spacing: -2px;
-}
-.product-description p {
-  font-size: 22px;
-  font-weight: 300;
-  color: #86939e;
-  line-height: 24px;
-}
-/* Product Price */
-.product-price {
-  display: flex;
-  align-items: center;
-}
-
-.product-price span {
-  font-size: 26px;
-  font-weight: 300;
-  color: #43474d;
-  margin-right: 22px;
-  padding-top: 25px;
-}
-
-button {
-  display: inline-block;
-  background-color: #ffd900;
-  border-radius: 6px;
-  font-size: 16px;
-  color: #0c0c0c;
-  text-decoration: none;
-  padding: 12px 30px;
-  transition: all 0.5s;
-  padding-left: 20px;
-}
-.cart-btn:hover {
-  background-color: #d8c200;
-}
-
-.disabledButton {
-  background-color: #d8d8d8;
-}
-
-/* Responsive */
-@media (max-width: 940px) {
-  .container {
-    flex-direction: column;
-    margin-top: 60px;
-  }
-
-  .left-column,
-  .right-column {
-    width: 100%;
-  }
-
-  .left-column img {
-    width: 300px;
-    right: 0;
-    top: -65px;
-    left: initial;
-  }
-}
-
-@media (max-width: 535px) {
-  .left-column img {
-    width: 220px;
-    top: -85px;
-  }
+.sigupbutton {
+  background-color: #3399ff;
+  color: white;
+  padding: 7px;
+  border: none;
+  cursor: pointer;
+  width: 15%;
+  opacity: 0.9;
+  margin-top: 50px;
 }
 </style>
