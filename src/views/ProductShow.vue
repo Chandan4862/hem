@@ -38,6 +38,14 @@
           {{ btn }}
         </button>
 
+        <button
+          v-on:click="BuyNow"
+          :disabled="product.product.maxcount == 0"
+          :class="{ disabledButton: product.product.maxcount == 0 }"
+        >
+          {{ btn2 }}
+        </button>
+
         <span v-if="product.product.maxcount < 1">Sold Out</span>
       </div>
     </div>
@@ -56,7 +64,8 @@ export default {
   },
   data() {
     return {
-      btn: 'AddToCart'
+      btn: 'AddToCart',
+      btn2: 'Buy Now'
     }
   },
   created() {
@@ -68,13 +77,23 @@ export default {
       console.log('Add to cart')
       console.log('ADD TO CART', this.product.product.pid)
       this.$store.dispatch('addProductToCart', this.product.product.pid)
+    },
+    BuyNow() {
+      console.log('Buy Now')
+
+      this.$router.push({
+        path: '/buynow',
+        name: 'buy-now'
+      })
     }
   },
   computed: {
     status() {
-      if (product.product.maxcount < 1) {
+      if (this.product.product.maxcount < 1) {
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.btn = 'Sold Out'
       }
+      return 1
     },
 
     ...mapState(['product', 'cart'])
@@ -97,7 +116,7 @@ body {
   width: 100%;
   margin: 0;
   font-family: 'Roboto', sans-serif;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
   padding: 15px;
   display: flex;
@@ -116,9 +135,9 @@ body {
 
 /* Left Column */
 .left-column img {
-  width: 75%;
+  width: 100%;
   position: absolute;
-  left: -50px;
+  left: -100px;
   top: 0;
   opacity: 100;
   transition: all 0.3s ease;
@@ -126,7 +145,6 @@ body {
 
 /* Product Description */
 .product-description {
-  padding-top: 70%;
   border-bottom: 1px solid #e1e8ee;
   margin-bottom: 20px;
 }
@@ -163,18 +181,19 @@ body {
   padding-top: 25px;
 }
 
-.button {
+button {
   display: inline-block;
-  background-color: #7dc855;
+  background-color: #ffd900;
   border-radius: 6px;
   font-size: 16px;
-  color: #ffffff;
+  color: #0c0c0c;
   text-decoration: none;
   padding: 12px 30px;
   transition: all 0.5s;
+  padding-left: 20px;
 }
 .cart-btn:hover {
-  background-color: #64af3d;
+  background-color: #d8c200;
 }
 
 .disabledButton {
