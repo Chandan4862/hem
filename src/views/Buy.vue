@@ -16,8 +16,8 @@
     <div class="right-column">
       <div class="Shipping-info">
         <h3>Please verify shipping information</h3>
-        <p>{{ profile.User.firstname }} {{ profile.User.lastname }}</p>
-        <p>{{ profile.User.address }}</p>
+        <!-- <p>{{ profile.User.firstname }} {{ profile.User.lastname }}</p>
+        <p>{{ profile.User.address }}</p>-->
         <button v-on:click="changeAddr">Change Address</button>
         <input
           type="text"
@@ -60,6 +60,8 @@ export default {
       delD: '',
       buyCart: {
         pid: '',
+        payment: '',
+        total: '',
         date: '',
         delD: ''
       },
@@ -99,7 +101,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['product', 'profile'])
+    ...mapState(['product'])
   },
   created() {
     this.date = new Date()
@@ -128,35 +130,37 @@ body {
   font-family: 'Roboto', sans-serif;
   /* max-width: 1200px; */
   margin: 0 auto;
-  padding: 15px;
+  padding: 60px;
   display: flex;
 }
 
 /* Columns */
 .left-column {
-  width: 70%;
+  width: 60%;
+  height: 70%;
   position: relative;
 }
 
 .right-column {
-  width: 30%;
+  width: 40%;
   margin-top: 60px;
-}
-
-/* Left Column */
-.product-image img {
-  width: 90%;
-  height: 70%;
-  position: absolute;
-  top: 0;
-  opacity: 100;
-  transition: all 0.3s ease;
 }
 /*left Column-product-info */
 .product-info {
   border-bottom: 1px solid #e1e8ee;
   margin-bottom: 20px;
 }
+
+/* Left Column */
+.product-image img {
+  width: 70%;
+  height: 50%;
+  position: relative;
+  top: 0;
+  opacity: 100;
+  transition: all 0.3s ease;
+}
+
 .product-info span {
   font-size: 35px;
   color: #358ed7;
