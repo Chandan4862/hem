@@ -18,5 +18,8 @@ export default {
   },
   getProduct() {
     return apiClient.get('/o/product/view')
+  },
+  buyNowCartService(buyNowCart) {
+    return apiClient.post('/o/product/order', buyNowCart)
   }
 }

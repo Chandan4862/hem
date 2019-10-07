@@ -61,17 +61,11 @@ export default {
       buyCart: {
         pid: '',
         payment: '',
-        total: '',
-        date: '',
-        delD: ''
-      },
-      bill: {
-        name: '',
-        pname: '',
-        date: '',
+        total: 0,
+        odate: '',
         delD: '',
-        total: '',
-        payment: ''
+        shippingaddress: '',
+        title: ''
       }
     }
   },
@@ -87,28 +81,39 @@ export default {
     checkOut() {
       console.log('CheckOut')
       this.buyCart.pid = this.product.product.pid
-      this.buyCart.date = new Date()
+      this.buyCart.odate = new Date()
       this.buyCart.delD = new Date(
-        this.date.getFullYear(),
-        this.date.getMonth(),
-        this.date.getDate() + 3
+        this.odate.getFullYear(),
+        this.odate.getMonth(),
+        this.odate.getDate() + 3
       )
-      this.bill.pname = this.product.product.title
-      this.bill.total = this.product.product.price
-      this.bill.payment = this.method
-
+      if (this.change) {
+        this.buyCart.shippingaddress = this.shippingaddr
+      } else {
+        this.buyCart.shippingaddress = this.profile.User.address
+      }
+      this.buyCart.total = this.product.product.price
+      this.buyCart.payment = this.method
+      this.buyCart.title = this.product.product.title
       console.log(this.buyCart)
+      this.$store.dispatch('buyNowCheckout', this.buyCart).then(
+        this.$router.push({
+          path: '/bill',
+          name: 'bill',
+          param: this.payment
+        })
+      )
     }
   },
   computed: {
     ...mapState(['product'])
   },
   created() {
-    this.date = new Date()
+    this.odate = new Date()
     this.delD = new Date(
-      this.date.getFullYear(),
-      this.date.getMonth(),
-      this.date.getDate() + 3
+      this.odate.getFullYear(),
+      this.odate.getMonth(),
+      this.odate.getDate() + 3
     )
   }
 }

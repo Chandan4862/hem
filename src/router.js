@@ -7,6 +7,7 @@ import productDetail from './views/ProductShow.vue'
 import HomePage from './views/HomePage.vue'
 import Register from './views/Register.vue'
 import BuyNow from './views/Buy.vue'
+import Bill from './views/Bill.vue'
 Vue.use(Router)
 
 const router = new Router({
@@ -47,6 +48,12 @@ const router = new Router({
       path: '/buynow',
       name: 'buy-now',
       component: BuyNow,
+      props: true
+    },
+    {
+      path: '/bill',
+      name: 'bill',
+      component: Bill,
       props: true
     }
   ]
